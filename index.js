@@ -1,5 +1,5 @@
 const express = require('express');
-const { dbConnection } = require('./database/config');
+const { dbConnection } = require('./src/database/config');
 require('dotenv').config();
 
 // Crear el Servidor de express
@@ -16,7 +16,7 @@ app.use( express.json() );
 
 
 // Rutas
-app.use('/api/auth', require('./routes/auth') );
+app.use('/api/auth', require('./src/routes/auth') );
 
 //Escuchar peticiones
 app.listen( process.env.PORT, () =>{
