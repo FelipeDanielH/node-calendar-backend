@@ -43,7 +43,6 @@ const crearUsuario = async (req, res = response) => {
             msg: 'Por favor hable con el administrador'
         });
     }
-
 }
 
 const loginUsuario = async (req, res = response) => {
@@ -70,8 +69,7 @@ const loginUsuario = async (req, res = response) => {
         }
 
         // Generar JWT
-        const token = generarJWT( usuario.id, usuario.name );
-        console.log(token);
+        const token = await generarJWT( usuario.id, usuario.name );
 
         res.status(201).json({
             ok: true,
@@ -89,10 +87,17 @@ const loginUsuario = async (req, res = response) => {
     }
 }
 
-const revalidarToken = (req, res = response) => {
+const revalidarToken = async (req, res = response) => {
+
+    const { uid, name } = req;
+     
+    // Generar JWT
+    const token = await generarJWT( uid, name );
+
     res.json({
         ok: true,
-        msg: 'renew'
+        msg: 'renew',
+        uid, name, token
     })
 }
 
